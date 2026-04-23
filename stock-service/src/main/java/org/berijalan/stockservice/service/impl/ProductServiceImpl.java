@@ -1,5 +1,6 @@
 package org.berijalan.stockservice.service.impl;
 
+import org.berijalan.stockservice.dto.request.ProductRequest;
 import org.berijalan.stockservice.entity.ProductEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductEntity saveProduct(ProductEntity productEntity) {
-        return productRepository.save(productEntity);
+    public ProductEntity saveProduct(ProductRequest productRequest) {
+        ProductEntity entity = new ProductEntity();
+        entity.setName(productRequest.getName());
+        entity.setPrice(productRequest.getPrice());
+        entity.setStock(productRequest.getStock());
+
+        return productRepository.save(entity);
     }
 }

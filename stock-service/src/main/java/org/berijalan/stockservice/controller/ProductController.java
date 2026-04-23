@@ -1,5 +1,7 @@
 package org.berijalan.stockservice.controller;
 
+import jakarta.validation.Valid;
+import org.berijalan.stockservice.dto.request.ProductRequest;
 import org.berijalan.stockservice.entity.ProductEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,8 +18,8 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping
-    public ResponseEntity<ProductEntity> create(@RequestBody ProductEntity productEntity) {
-        ProductEntity savedProduct = productService.saveProduct(productEntity);
+    public ResponseEntity<ProductEntity> create(@Valid @RequestBody ProductRequest productRequest) {
+        ProductEntity savedProduct = productService.saveProduct(productRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedProduct);
     }
 

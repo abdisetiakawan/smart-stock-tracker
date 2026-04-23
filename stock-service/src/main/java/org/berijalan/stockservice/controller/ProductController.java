@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.berijalan.stockservice.service.ProductService;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/stock/products")
@@ -26,5 +27,10 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<List<ProductEntity>> getAll() {
         return ResponseEntity.ok(productService.getAllProduct());
+    }
+
+    @GetMapping("/{id}/usd")
+    public ResponseEntity<Map<String, Object>> getProductInUsd(@PathVariable Long id) {
+        return ResponseEntity.ok(productService.getProductWithUsdPrice(id));
     }
 }
